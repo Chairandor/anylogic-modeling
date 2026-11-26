@@ -1,0 +1,18 @@
+# Working with ALP and ALPX
+
+**Official.** ALP is the single-file project format. A model may also refer to images, databases, JARs, CAD data and other external files. ALPX, introduced in 8.9.0, is the entry file together with a sibling `_alp` tree. Among its contents are separate agent presentation, function, event, variable and connector files, and a directory for custom Java classes. Keep the entry file, the full `_alp` tree and resources together. Use the editor's **Save As** format option to convert between forms. [Model file formats](https://www.anylogic.help/anylogic/ui/model-formats.html), [relative resource paths](https://www.anylogic.help/anylogic/ui/relative-filepaths.html).
+
+## Editing a single-file ALP
+
+**Observed on Windows with PLE 8.9.10.** The installed examples and projects edited in this workflow included XML with `AnyLogicWorkspace/Model`, model version attributes, `ActiveObjectClasses`, `Presentation/Level/Presentation` and `Experiments`. A project header can name an older serialization version than the installed build. When adapting an existing document, keep its header until the editor converts or saves it.
+
+- Parse with XML awareness and preserve CDATA for Java source. Use UTF-8 and retain unknown elements, namespaces and resource payloads. Local package renames affect the model's Java package and every corresponding `PackageName` reference. Library package/class names are independent.
+- There are multiple kinds of references. The experiment root and `CurrentLevel` use IDs. Some connectors use model package, owning agent class and embedded block name, followed by a library class and port name. Population presentation can have a separate ID link. Do not treat coordinates or display labels as identity.
+- On the sampled connector schema, the XML endpoint labeled `Source` can be the receiving `in` port. Read `ItemName` and block type at both endpoints and check generated connection orientation. Update any connector geometry separately from its identity.
+- A new block needs its correct library descriptor, generic bindings, units, callbacks and ports. Clone a block from the smallest same-purpose sample, preserving required library references. An absent `Value` often means the library default, which can be different from a literal blank. A local agent class reference and its custom population binding are distinct.
+- Allocate fresh unique explicit IDs for new objects. When duplicating a nested object, inspect its interior for ID-bearing elements. Some editor-owned elements omit IDs in official examples. A converter may repair these when loading. Retain the resulting native save if a project exhibits persistent repairs, after checking it in a separate copy.
+- Stage the write to a new file. Reopen it from disk after external changes and confirm which version the editor loaded before saving. Preserve recovery files and the user's unrelated edits. The supplied inspector verifies a small known subset of the reference types. It is a preflight check.
+
+For a complete project created from a known local seed, inspect the working sample's current level, scale, root experiment and required libraries first. Add one block, shape or scalar setting, run end to end, then extend to the rest. For ALPX changes, use a before/after native save or a small Git diff to locate the authoritative fragment. Plan renames across the entry, member files, Java and connections before modifying them.
+
+**Pending.** Direct ALPX rewriting and round-tripping were outside this skill's local tests. No general third-party XML schema or all-version serializer is assumed. The packaged authoring script handles the supplied ALP family.

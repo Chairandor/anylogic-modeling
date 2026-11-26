@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+lab-output/
+*.alp
+*.alpx
+_alp/
+*.autosave
+*.csv

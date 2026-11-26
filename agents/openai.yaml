@@ -1,0 +1,3 @@
+interface:
+  display_name: "AnyLogic Modeling"
+  short_description: "Create, modify, and verify AnyLogic models"
