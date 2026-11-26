@@ -1,5 +1,7 @@
 # AnyLogic Modeling Skill
 
+[简体中文](README.zh-CN.md)
+
 An agent skill for creating, editing, and validating native AnyLogic simulation models on Windows.
 
 ## Use the skill
